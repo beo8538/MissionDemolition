@@ -42,7 +42,7 @@ public class Cloud : MonoBehaviour
             Transform SPTrans = SP.transform;
             SPTrans.SetParent(this.transform); //sets location relevant to the cloud object (parent)
 
-            //Randomly assign a position
+            //Randomly assign a position for x, y, and z
             Vector3 offset = Random.insideUnitSphere;
             offset.x *= sphereOffsetScale.x;
             offset.y *= sphereOffsetScale.y;
