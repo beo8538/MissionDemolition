@@ -68,8 +68,9 @@ public class SlingShot : MonoBehaviour
         {
             AimingMode = false;
             ProjectileRB.isKinematic = false;
-            ProjectileRB.velocity = -MouseDelta * VelocityMultiplier;
-            Projectile = null; //forget the last instance
+            ProjectileRB.velocity = -MouseDelta * VelocityMultiplier; // velocity if multiplied to the mouseDelta
+            FollowCam.POI = Projectile; //set the POI for the camera
+            Projectile = null; //forget the last instance (the instance still exists but we don't have a ref to it)
         }
 
     }//end Update
