@@ -3,7 +3,7 @@
  * Script Created 2/14/22
  * 
  * Last Edited by: NA
- * Updated on 2/14/22
+ * Updated on 2/16/22
  * 
  * Dscription: create randomly generated cloud
  */
@@ -47,13 +47,41 @@ public class Cloud : MonoBehaviour
             offset.x *= sphereOffsetScale.x;
             offset.y *= sphereOffsetScale.y;
             offset.z *= sphereOffsetScale.z;
+            SPTrans.localPosition = offset;
 
+            //Randomly assign scale
+            Vector3 scale = Vector3.one;
+            scale.x = Random.Range(sphereScaleRangeX.x, sphereScaleRangeX.y);
+            scale.y = Random.Range(sphereScaleRangeY.x, sphereScaleRangeY.y);
+            scale.z = Random.Range(sphereScaleRangeZ.x, sphereScaleRangeZ.y);
+
+            //Adjust y scale by x distance from core
+            scale.y *= 1 - (Mathf.Abs(offset.x) / sphereOffsetScale.x);
+            scale.y = Mathf.Max(scale.y, scaleYMin);
+
+            SPTrans.localScale = scale;
         } //end for loop 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        /*
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Restart();
+        }
+        */
     }
+
+    void Restart()
+    {
+        foreach (GameObject SP in spheres)
+        {
+            Destroy(SP);
+        }
+
+        Start();
+    }
+
 }
