@@ -3,7 +3,7 @@
  * Script Created 2/14/22
  * 
  * Last Edited by: NA
- * Updated on 2/14/22
+ * Updated on 2/16/22
  * 
  * Dscription: 
  */
@@ -38,8 +38,26 @@ public class FollowCam : MonoBehaviour
     // FixedUpdate
     void FixedUpdate()
     {
-        if (POI == null) return; // do nothing is no POI
-        Vector3 destination = POI.transform.position;
+        //if (POI == null) return; // do nothing is no POI
+        //Vector3 destination = POI.transform.position;
+
+        Vector3 destination;
+        if(POI == null)
+        {
+            destination = Vector3.zero; //destination is zero
+        } //end if(POI == null)
+        else
+        {
+            destination = POI.transform.position;
+            if(POI.tag == "Projectile")
+            {
+                if(POI.GetComponent<Rigidbody>().IsSleeping())
+                {
+                    POI = null; //null the POI if rigidbody is asleep
+                    return; //happens in the next update
+                } //end if(POI.GetComponent<Rigidbody>().IsSleeping())
+            } //end if(POI.tag == "Projectile")
+        } //end else
 
         destination.x = Mathf.Max(minXY.x, destination.x);
         destination.y = Mathf.Max(minXY.y, destination.y);
