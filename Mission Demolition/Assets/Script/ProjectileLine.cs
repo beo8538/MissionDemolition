@@ -5,7 +5,7 @@
  * Last Edited by: NA
  * Updated on 2/16/22
  * 
- * Dscription: Create trailing line behind projectile
+ * Description: Create trailing line behind projectile
  */
 
 using System.Collections;
@@ -67,6 +67,68 @@ public class ProjectileLine : MonoBehaviour
             //if the point isn't far enough from the last point, it returns
             return;
         }
+        if(points.Count == 0) //If this is the launch point...
+        {
+            Vector3 launchPosDiff = pt - SlingShot.LAUNCH_POS; //To be defined
+            //...it adds an extra bit of line to aid aiming later
+            points.Add(pt + launchPosDiff);
+            points.Add(pt);
+            line.positionCount = 2;
+            //Sets the first two points
+            line.SetPosition(0, points[0]);
+            line.SetPosition(1, points[1]);
+            //Enables the LineRenderer
+            line.enabled = true;
+        }
+        else
+        {
+            //Normal behavior of adding a point
+            points.Add(pt);
+            line.positionCount = points.Count;
+            line.SetPosition(points.Count - 1, lastPoint);
+            line.enabled = true;
+        }
     }
 
+    public Vector3 lastPoint
+    {
+        get
+        {
+            if(points == null)
+            {
+                //if there are no points, returns Vector3.zero
+                return (Vector3.zero);
+            }
+            return (points[points.Count - 1]);
+        }
+    }
+    private void FixedUpdate()
+    {
+        if(poi == null)
+        {
+            //If there is no poi, search for one
+            if(FollowCam.POI != null)
+            {
+                if(FollowCam.POI.tag == "Projectile")
+                {
+                    poi = FollowCam.POI;
+                } 
+                else
+                {
+                    return; //Return if we didn't find a poi
+                }
+            }
+            else
+            {
+                return; // Return if we didn't find a poi
+            }
+        }
+        //If there is a poi, it's loc is added every FixedUpdate
+        AddPoint();
+        if(FollowCam.POI == null)
+        {
+            //Once FollowCam.POI is null, make the local poi null too
+            poi = null;
+        }
+    }
 }
