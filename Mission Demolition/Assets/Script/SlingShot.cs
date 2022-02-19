@@ -2,7 +2,7 @@
  * Created by Betzaida Ortiz Rivas
  * Script Created 2/9/22
  * 
- * Updated on 2/16/22
+ * Updated on 2/19/22
  * 
  * Description: sling the projectile forwards
  */
@@ -79,11 +79,14 @@ public class SlingShot : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+            //the mouse has been released
             AimingMode = false;
             ProjectileRB.isKinematic = false;
             ProjectileRB.velocity = -MouseDelta * VelocityMultiplier; // velocity if multiplied to the mouseDelta
             FollowCam.POI = Projectile; //set the POI for the camera
             Projectile = null; //forget the last instance (the instance still exists but we don't have a ref to it)
+            MissionDemolition.ShotFired();
+            ProjectileLine.S.poi = Projectile;
         }
 
     }//end Update
