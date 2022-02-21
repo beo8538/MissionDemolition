@@ -18,6 +18,7 @@ public class ProjectileLine : MonoBehaviour
 
     [Header("Set In Inpspector")]
     public float minDist = 0.1f;
+    public Vector2 LineWidth = new Vector2(0.0f, 0.1f); //change the width of the projectile line from start to end
     private LineRenderer line;
     private GameObject _poi;
     private List<Vector3> points;
@@ -27,6 +28,7 @@ public class ProjectileLine : MonoBehaviour
         S = this; //sets the singleton
 
         line = GetComponent<LineRenderer>(); // reference to lineRenderer
+        
         line.enabled = false; //disable lineRenderer
         points = new List<Vector3>(); //new list
 
