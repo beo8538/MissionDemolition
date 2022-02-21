@@ -2,9 +2,9 @@
  * Created by Betzaida Ortiz Rivas
  * Script Created 2/9/22
  * 
- * Updated on 2/9/22
+ * Updated on 2/19/22
  * 
- * Dscription: 
+ * Description: sling the projectile forwards
  */
 
 using System.Collections;
@@ -13,10 +13,13 @@ using UnityEngine;
 
 public class SlingShot : MonoBehaviour
 {
+    static private SlingShot S;
+    //fields set in the Unity Inspector pane
     /**VARIABLES**/
     [Header("Set In Inpsector")]
     public GameObject prefabProjectile;
     public float VelocityMultiplier = 8f;
+    private Rigidbody projectileRigidbody;
 
     [Header("Set Dynamically")]
     public GameObject LaunchPoint;
@@ -25,8 +28,18 @@ public class SlingShot : MonoBehaviour
     public bool AimingMode; //is the player aiming
     public Rigidbody ProjectileRB; //rigid body of projectile
 
+    static public Vector3 LAUNCH_POS
+    {
+        get
+        {
+            if (S == null) return Vector3.zero;
+            return S.LaunchPos;
+        }
+    }
+
     private void Awake()
     {
+        S = this;
         Transform LaunchPointTrans = transform.Find("LaunchPoint"); //find the child object
         LaunchPoint = LaunchPointTrans.gameObject; //the game object of this child object
         LaunchPoint.SetActive(false); // disable game object
@@ -66,11 +79,14 @@ public class SlingShot : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+            //the mouse has been released
             AimingMode = false;
             ProjectileRB.isKinematic = false;
             ProjectileRB.velocity = -MouseDelta * VelocityMultiplier; // velocity if multiplied to the mouseDelta
             FollowCam.POI = Projectile; //set the POI for the camera
             Projectile = null; //forget the last instance (the instance still exists but we don't have a ref to it)
+            MissionDemolition.ShotFired();
+            ProjectileLine.S.poi = Projectile;
         }
 
     }//end Update

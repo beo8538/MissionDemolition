@@ -5,7 +5,7 @@
  * Last Edited by: NA
  * Updated on 2/16/22
  * 
- * Dscription: create randomly generated cloud(s)
+ * Description: create randomly generated cloud(s)
  */
 
 using System.Collections;

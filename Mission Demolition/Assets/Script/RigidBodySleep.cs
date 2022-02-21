@@ -5,7 +5,7 @@
  * Last Edited by: NA
  * Updated on 2/16/22
  * 
- * Dscription: Put rigidbody to sleep
+ * Description: Put rigidbody to sleep
  */
 
 using System.Collections;
