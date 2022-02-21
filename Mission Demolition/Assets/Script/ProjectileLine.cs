@@ -43,6 +43,7 @@ public class ProjectileLine : MonoBehaviour
             _poi = value;
             if (_poi != null)
             {
+                //when _poi is set to something new, it resets everything
                 line.enabled = false;
                 points = new List<Vector3>();
                 AddPoint();
@@ -62,7 +63,7 @@ public class ProjectileLine : MonoBehaviour
     {
         //This is called to add point to the line
         Vector3 pt = _poi.transform.position;
-        if(points.Count == 0 && (pt - lastPoint).magnitude < minDist)
+        if(points.Count > 0 && (pt - lastPoint).magnitude < minDist)
         {
             //if the point isn't far enough from the last point, it returns
             return;

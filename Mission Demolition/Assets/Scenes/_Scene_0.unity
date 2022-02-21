@@ -1223,7 +1223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d72d09970a7ff45bafc7fd7b23f819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDist: 1
+  minDist: 0.1
 --- !u!120 &1539762081
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1233,9 +1233,9 @@ LineRenderer:
   m_GameObject: {fileID: 1539762079}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
-  m_MotionVectors: 0
+  m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
@@ -1243,7 +1243,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 9c77afa4691b7564db674818d13b4dc1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
