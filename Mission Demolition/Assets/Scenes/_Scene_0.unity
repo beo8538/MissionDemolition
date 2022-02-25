@@ -1224,6 +1224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDist: 0.1
+  LineWidth: {x: 0, y: 0.1}
 --- !u!120 &1539762081
 LineRenderer:
   m_ObjectHideFlags: 0
